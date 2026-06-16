@@ -103,20 +103,15 @@ class DoctorSerializer(serializers.ModelSerializer):
 
 
 class PatientDoctorMappingSerializer(serializers.ModelSerializer):
-    patient_detail = PatientSerializer(source="patient", read_only=True)
-    doctor_detail = DoctorSerializer(source="doctor", read_only=True)
-
     class Meta:
         model = PatientDoctorMapping
         fields = [
             "id",
             "patient",
             "doctor",
-            "patient_detail",
-            "doctor_detail",
             "created_at",
         ]
-        read_only_fields = ["id", "patient_detail", "doctor_detail", "created_at"]
+        read_only_fields = ["id", "created_at"]
 
     def validate_patient(self, patient):
         request = self.context["request"]
